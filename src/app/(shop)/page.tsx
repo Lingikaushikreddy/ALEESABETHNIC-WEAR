@@ -53,25 +53,25 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-[80vh] w-full overflow-hidden bg-gradient-to-br from-purple-900 to-purple-700">
+      <div className="relative h-[60vh] md:h-[80vh] w-full overflow-hidden bg-gradient-to-br from-purple-900 to-purple-700">
         {/* Background Image */}
         <img
           src="/hero-banner.png"
           className="w-full h-full object-cover object-center"
           alt="Aleesa Ethnic Wear - Timeless Traditions, Refined"
         />
-        <div className="absolute inset-0 bg-black/10 flex items-center justify-center text-center">
+        <div className="absolute inset-0 bg-black/20 md:bg-black/10 flex items-center justify-center text-center">
           <div className="max-w-2xl px-4 animate-fade-in-up">
-            <h2 className="text-white font-heading font-medium tracking-[4px] uppercase text-sm mb-4">#aleesaethnicwear</h2>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-tight">
+            <h2 className="text-white font-heading font-medium tracking-[3px] md:tracking-[4px] uppercase text-xs md:text-sm mb-3 md:mb-4">#aleesaethnicwear</h2>
+            <h1 className="text-4xl md:text-5xl lg:text-7xl font-heading font-bold text-white mb-6 leading-tight">
               Timeless Traditions,<br />Refined
             </h1>
-            <p className="text-white/90 text-lg mb-8 font-light">
+            <p className="text-white/90 text-base md:text-lg mb-6 md:mb-8 font-light">
               We dream not only of making women more beautiful but happier too
             </p>
             <Link
               href="/collections/new-arrivals"
-              className="inline-block bg-white text-black px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-primary hover:text-white transition-all duration-300"
+              className="inline-block bg-white text-black px-8 md:px-10 py-3 md:py-4 font-bold uppercase tracking-widest text-xs hover:bg-primary hover:text-white transition-all duration-300"
             >
               Explore Collection
             </Link>
