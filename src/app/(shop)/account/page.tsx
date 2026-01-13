@@ -46,14 +46,17 @@ export default async function AccountPage() {
                             <p className="text-sm text-gray-500">Manage shipping addresses</p>
                         </Link>
 
-                        <Link href="/profile" className="p-6 hover:bg-gray-50 transition-colors group opacity-50 cursor-not-allowed" title="Coming Soon">
-                            <div className="flex items-center justify-between mb-4">
-                                <User className="w-8 h-8 text-purple-500" />
-                                <ChevronRight className="text-gray-300 group-hover:text-purple-500 transition-colors" />
-                            </div>
-                            <h3 className="font-bold text-lg mb-1">Profile</h3>
-                            <p className="text-sm text-gray-500">Edit login and personal details</p>
-                        </Link>
+                        {/* Admin Link - Only visible to Admins */}
+                        {user?.role === 'ADMIN' && (
+                            <Link href="/admin" className="p-6 hover:bg-gray-50 transition-colors group bg-gray-50/50">
+                                <div className="flex items-center justify-between mb-4">
+                                    <div className="w-8 h-8 bg-black text-white rounded flex items-center justify-center font-bold text-xs">A</div>
+                                    <ChevronRight className="text-gray-300 group-hover:text-black transition-colors" />
+                                </div>
+                                <h3 className="font-bold text-lg mb-1">Admin Panel</h3>
+                                <p className="text-sm text-gray-500">Manage orders & inventory</p>
+                            </Link>
+                        )}
                     </div>
                 </div>
 
