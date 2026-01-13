@@ -128,6 +128,7 @@
     @apply bg-background text-foreground;
   }
 }
+
 /* Mobile UX Enhancements */
 html {
   scroll-behavior: smooth;
@@ -145,7 +146,8 @@ body {
 }
 
 /* Smooth transitions for interactive elements */
-button, a {
+button,
+a {
   transition: all 0.2s ease;
 }
 
@@ -154,6 +156,7 @@ button, a {
   0% {
     background-position: -1000px 0;
   }
+
   100% {
     background-position: 1000px 0;
   }
@@ -161,12 +164,39 @@ button, a {
 
 .skeleton {
   animation: shimmer 2s infinite linear;
-  background: linear-gradient(
-    to right,
-    #f0f0f0 0%,
-    #e0e0e0 20%,
-    #f0f0f0 40%,
-    #f0f0f0 100%
-  );
+  background: linear-gradient(to right,
+      #f0f0f0 0%,
+      #e0e0e0 20%,
+      #f0f0f0 40%,
+      #f0f0f0 100%);
   background-size: 1000px 100%;
+}
+
+/* Touch Ripple Effect */
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+
+.ripple:after {
+  content: "";
+  display: block;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  background-image: radial-gradient(circle, #fff 10%, transparent 10.01%);
+  background-repeat: no-repeat;
+  background-position: 50%;
+  transform: scale(10, 10);
+  opacity: 0;
+  transition: transform .5s, opacity 1s;
+}
+
+.ripple:active:after {
+  transform: scale(0, 0);
+  opacity: 0.3;
+  transition: 0s;
 }

@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { Heart, ShoppingBag } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import { useWishlist } from '@/context/WishlistContext'
@@ -22,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     const handleQuickAdd = (e: React.MouseEvent) => {
         e.preventDefault()
         e.stopPropagation()
-        
+
         if (product.variants?.[0]?.sizes?.[0]) {
             addToCart({
                 productId: product.id,
@@ -51,7 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
     }
 
     return (
-        <Link 
+        <Link
             href={`/products/${product.slug}`}
             className="group block"
             onMouseEnter={() => setShowQuickAdd(true)}
@@ -62,14 +63,14 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {!imageLoaded && (
                     <div className="absolute inset-0 skeleton" />
                 )}
-                <img
+                <Image
                     src={mainImage}
                     alt={product.name}
-                    className={`w-full h-full object-cover transition-all duration-500 ${
-                        imageLoaded ? 'opacity-100 group-hover:scale-105' : 'opacity-0'
-                    }`}
+                    fill
+                    sizes="(max-width: 768px) 50vw, (max-width: 1200px) 33vw, 25vw"
+                    className={`object-cover transition-all duration-500 ${imageLoaded ? 'opacity-100 group-hover:scale-105' : 'opacity-0'
+                        }`}
                     onLoad={() => setImageLoaded(true)}
-                    loading="lazy"
                 />
 
                 {/* Wishlist Button */}
@@ -87,9 +88,8 @@ export default function ProductCard({ product }: ProductCardProps) {
                 {/* Quick Add Button (Mobile & Desktop) */}
                 <button
                     onClick={handleQuickAdd}
-                    className={`absolute bottom-3 left-3 right-3 bg-primary text-white py-3 px-4 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg ${
-                        showQuickAdd ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 md:opacity-0'
-                    } md:group-hover:opacity-100 md:group-hover:translate-y-0`}
+                    className={`absolute bottom-3 left-3 right-3 bg-primary text-white py-3 px-4 rounded-lg font-medium text-sm flex items-center justify-center gap-2 transition-all active:scale-95 shadow-lg ${showQuickAdd ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-2 md:opacity-0'
+                        } md:group-hover:opacity-100 md:group-hover:translate-y-0`}
                 >
                     <ShoppingBag size={16} />
                     Quick Add

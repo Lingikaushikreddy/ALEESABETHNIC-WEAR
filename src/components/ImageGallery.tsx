@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { Star } from 'lucide-react'
+import Image from 'next/image'
 
 interface ImageGalleryProps {
     images: string[]
@@ -19,10 +19,13 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
                 className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden cursor-zoom-in relative group"
                 onClick={() => setIsZoomOpen(true)}
             >
-                <img
+                <Image
                     src={images[selectedImage]}
                     alt={`${productName} - Image ${selectedImage + 1}`}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    priority
                 />
                 <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity bg-black/10 pointer-events-none">
                     <span className="bg-white/90 text-xs font-bold px-3 py-1 rounded shadow-sm text-gray-900">
@@ -37,15 +40,17 @@ export default function ImageGallery({ images, productName }: ImageGalleryProps)
                     <button
                         key={i}
                         onClick={() => setSelectedImage(i)}
-                        className={`flex-shrink-0 w-20 h-24 bg-gray-100 rounded overflow-hidden border-2 transition-all ${selectedImage === i
+                        className={`flex-shrink-0 relative w-20 h-24 bg-gray-100 rounded overflow-hidden border-2 transition-all ${selectedImage === i
                             ? 'border-primary ring-2 ring-primary/20'
                             : 'border-transparent hover:border-gray-300'
                             }`}
                     >
-                        <img
+                        <Image
                             src={img}
                             alt={`Thumbnail ${i + 1}`}
-                            className="w-full h-full object-cover"
+                            fill
+                            sizes="80px"
+                            className="object-cover"
                         />
                     </button>
                 ))}
