@@ -39,12 +39,14 @@ export default function Header() {
 
                     {/* Center: Logo */}
                     <div className="flex-1 flex justify-center">
-                        <Link href="/" className="flex items-center">
-                            <img
-                                src="/logo.png"
-                                alt="Aleesa Ethnic Wear"
-                                className="h-10 md:h-12 w-auto object-contain"
+                        <Link href="/" className="flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm">
+                            <img 
+                                src="/logo.png" 
+                                alt="Aleesa Ethnic Wear" 
+                                className="h-14 md:h-16 w-auto object-contain" 
                             />
+                        </Link>
+                    </div>
                         </Link>
                     </div>
 
