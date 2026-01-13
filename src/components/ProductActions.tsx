@@ -5,6 +5,7 @@ import { ShoppingCart } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import WishlistButton from '@/components/WishlistButton'
 import WhatsAppButton from '@/components/WhatsAppButton'
+import SizeGuide from '@/components/SizeGuide'
 
 interface Size {
     id: string
@@ -63,7 +64,10 @@ export default function ProductActions({ product, variant }: ProductActionsProps
         <div>
             {/* Size Selector */}
             <div className="mb-8">
-                <div className="font-bold text-sm uppercase tracking-widest mb-3">Select Size</div>
+                <div className="flex items-center justify-between mb-3">
+                    <div className="font-bold text-sm uppercase tracking-widest">Select Size</div>
+                    <SizeGuide />
+                </div>
                 <div className="flex flex-wrap gap-3">
                     {variant.sizes.map(s => (
                         <button
