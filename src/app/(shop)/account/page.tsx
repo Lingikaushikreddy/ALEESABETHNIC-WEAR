@@ -1,7 +1,4 @@
-import { getSession } from '@/lib/auth'
-import { redirect } from 'next/navigation'
-import Link from 'next/link'
-import { Package, MapPin, User, LogOut, ChevronRight } from 'lucide-react'
+import prisma from '@/lib/prisma'
 
 export default async function AccountPage() {
     const session = await getSession()
@@ -10,7 +7,12 @@ export default async function AccountPage() {
         redirect('/login?redirect=/account')
     }
 
-    const user = session.user // Assuming session has user details or fetch from db
+    const user = await prisma.user.findUnique({
+        where: { id: session.userId }
+    })
+
+    const displayName = user?.firstName || user?.email?.split('@')[0] || 'User'
+    const initial = displayName.charAt(0).toUpperCase()
 
     return (
         <div className="min-h-screen bg-gray-50 py-12 md:py-20">
@@ -19,10 +21,10 @@ export default async function AccountPage() {
                     <div className="p-8 border-b border-gray-100 flex items-center gap-4">
                         <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center text-primary font-bold text-2xl">
                             {/* Initials */}
-                            {(user?.name || 'U').charAt(0).toUpperCase()}
+                            {initial}
                         </div>
                         <div>
-                            <h1 className="text-2xl font-bold text-gray-900">Welcome, {user?.name || 'User'}</h1>
+                            <h1 className="text-2xl font-bold text-gray-900">Welcome, {displayName}</h1>
                             <p className="text-gray-500">{user?.email}</p>
                         </div>
                     </div>
