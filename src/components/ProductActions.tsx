@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { ShoppingCart } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import WishlistButton from '@/components/WishlistButton'
+import WhatsAppButton from '@/components/WhatsAppButton'
 
 interface Size {
     id: string
@@ -104,11 +105,23 @@ export default function ProductActions({ product, variant }: ProductActionsProps
                         price: product.price,
                         image: product.images[0],
                         slug: product.slug,
-                        category: "product" // defaulting as category prop missing in interface but needed for wishlist item
+                        category: "product"
                     }}
                     className="w-16 flex items-center justify-center border border-gray-300 hover:border-primary"
                     iconSize={24}
                 />
+            </div>
+
+            {/* WhatsApp Buy Button */}
+            <div className="mt-4">
+                <WhatsAppButton
+                    productName={product.name}
+                    productUrl={typeof window !== 'undefined' ? window.location.href : undefined}
+                    variantName={selectedSize ? `Size: ${selectedSize}` : undefined}
+                />
+                <p className="text-center text-xs text-gray-500 mt-2">
+                    Direct buy via WhatsApp • Instant Support
+                </p>
             </div>
         </div>
     )
