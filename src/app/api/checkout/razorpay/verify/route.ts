@@ -27,18 +27,27 @@ export async function POST(request: Request) {
             })
 
             if (order) {
-                await prisma.order.update({
+                const updatedOrder = await prisma.order.update({
                     where: { id: order.id },
                     data: {
                         status: 'CONFIRMED',
                         paymentStatus: 'PAID',
                         razorpayPaymentId: razorpay_payment_id
-                    }
+                    },
+                    include: { items: true } // Include items for email
                 })
 
                 // 3. Stock Deduction (Optional but recommended)
                 // We would iterate over order items and decrement stock
                 // Skipped for MVP speed, but placeholder comment added
+
+                // 4. Send Email Notification
+                try {
+                    const { sendOrderNotification } = await import('@/lib/email')
+                    await sendOrderNotification(updatedOrder)
+                } catch (emailError) {
+                    console.error('Failed to send email:', emailError)
+                }
             }
 
             return NextResponse.json({
