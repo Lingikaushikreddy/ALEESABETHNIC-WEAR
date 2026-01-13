@@ -1,6 +1,7 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
 import MobileNav from '@/components/MobileNav'
+import BackToTop from '@/components/BackToTop'
 import { CartProvider } from '@/context/CartContext'
 import { WishlistProvider } from '@/context/WishlistContext'
 
@@ -18,6 +19,7 @@ export default function ShopLayout({
                         {children}
                     </main>
                     <MobileNav />
+                    <BackToTop />
                 </CartProvider>
             </WishlistProvider>
             <Footer />
