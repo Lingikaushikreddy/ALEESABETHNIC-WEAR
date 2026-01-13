@@ -1,4 +1,8 @@
 import prisma from '@/lib/prisma'
+import { getSession } from '@/lib/auth'
+import { redirect } from 'next/navigation'
+import Link from 'next/link'
+import { Package, MapPin, User, LogOut, ChevronRight } from 'lucide-react'
 
 export default async function AccountPage() {
     const session = await getSession()
