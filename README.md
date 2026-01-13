@@ -1,8 +1,8 @@
-# 🌸 Aleesa Ethnic Wear
+# 🌸 ALEESA ETHNIC WEAR — Full-Stack E-commerce Platform (MVP)
 
 ![Aleesa Banner](public/placeholder.png)
 
-> A premium, full-stack e-commerce platform for ethnic wear, built with modern web technologies. Experience seamless shopping with robust discovery, secure checkout, and comprehensive admin management.
+> A premium, full-stack e-commerce platform for ethnic wear built with modern web technologies. Includes high-quality storefront UX, secure authentication, guest + user cart support, checkout validation, and a transaction-safe order system.
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-black?style=for-the-badge&logo=next.js&logoColor=white)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript&logoColor=white)
@@ -10,50 +10,101 @@
 ![Prisma](https://img.shields.io/badge/Prisma-6.0-2D3748?style=for-the-badge&logo=prisma&logoColor=white)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-336791?style=for-the-badge&logo=postgresql&logoColor=white)
 
+---
+
+## ✅ Tech Stack
+
+### Frontend
+- **Framework**: Next.js (App Router) + TypeScript
+- **Styling**: Tailwind CSS + shadcn/ui
+- **Icons**: Lucide Icons
+- **State Management**: React Context (Auth + Cart)
+
+### Backend
+- **API**: Next.js API Routes (Serverless)
+- **Auth**: Custom JWT Authentication (Access + Refresh Tokens)
+- **Security**: RBAC Roles (CUSTOMER, ADMIN)
+- **Logic**: Transaction-safe Cart Merge + Idempotent Orders
+
+### Database
+- **Engine**: PostgreSQL (Neon Free Tier)
+- **ORM**: Prisma ORM
+
+### Media
+- **Storage**: Cloudinary (Product image storage + optimization)
+
+---
+
 ## ✨ Key Features
 
 ### 🛍️ Customer Experience
-*   **Modern Storefront**: Responsive, high-performance UI inspired by top fashion brands.
-*   **Global Search**: Instant product discovery by name, category, or description.
-*   **Smart Filtering**: Filter collections by price range and sort by newest/price.
-*   **Product Details**: Rich product pages with image galleries, size selection, and related products.
-*   **Wishlist**: Save favorite items for later (locally persisted).
-*   **Product Reviews**: Star ratings and detailed customer feedback.
-*   **User Accounts**: Order history tracking and profile management.
+- **Modern Storefront**: Mobile-first, fast, and clean UI.
+- **Collection Browsing**: Advanced sorting and pagination.
+- **Product Details**: Variant selection (size/color) and real-time stock options.
+- **Search**: Dedicated endpoint for instant product discovery.
+- **Accounts**: Customer profile management with order history and address book.
 
-### 💳 Secure Checkout
-*   **Shopping Cart**: Persistent cart state with stock validation.
-*   **Payment Integration**: Secure payments powered by **Razorpay**.
-*   **Guest Checkout**: Seamless flow for non-logged-in users with auto-registration.
+### 🛒 Cart (Highlight Feature)
+- **Persistence**: robust cart for both guests and logged-in users.
+- **Auto-Merge**: Seamlessly merges guest cart into user cart upon login.
+- **Stock Validation**: Server-side checks to prevent overselling.
 
-### 👑 Admin Dashboard
-*   **Order Management**: View, filter, and update order status (Pending → Shipped → Delivered).
-*   **Product Management**: Create, edit, and delete products with variant support.
-*   **Inventory Control**: Real-time stock management for different sizes.
-*   **Analytics**: Sales overview and order metrics (Coming Soon).
+### ✅ Checkout (COD MVP)
+- **Address Management**: Selection and validation of shipping addresses.
+- **Validation API**: Verifies pricing and stock availability before order placement.
+- **Payment**: Cash on Delivery (MVP) with extensible architecture.
+- **Reliability**: Order snapshots for historical accuracy.
 
-## 🛠️ Tech Stack
+### 👑 Admin (MVP)
+- **Order Management**: View and update order statuses.
+- **Security**: Protected routes via middleware + Role-Based Access Control (RBAC).
 
-**Frontend**
-*   **Framework**: [Next.js 15](https://nextjs.org/) (App Router)
-*   **Language**: [TypeScript](https://www.typescriptlang.org/)
-*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
-*   **Icons**: [Lucide React](https://lucide.dev/)
-*   **State Management**: React Context (Cart, Wishlist)
+---
 
-**Backend**
-*   **Database**: PostgreSQL
-*   **ORM**: [Prisma](https://www.prisma.io/)
-*   **Authentication**: Custom JWT-based secure session management (JOSE).
-*   **Payments**: Razorpay SDK
-*   **Image Storage**: Cloudinary (Configured)
+## ✅ API Endpoints
+
+### Auth
+- `POST /api/auth/register` - Create a new account
+- `POST /api/auth/login` - Authenticate user
+- `POST /api/auth/logout` - End session
+- `POST /api/auth/refresh` - Refresh access token
+- `GET  /api/auth/me` - Get current user details
+
+### Catalog
+- `GET /api/categories` - List all categories
+- `GET /api/products` - List products (filters/sorting/pagination)
+- `GET /api/products/[slug]` - Get single product details
+- `GET /api/search` - Search products
+
+### Cart
+- `GET /api/cart` - Get current cart
+- `POST /api/cart/items` - Add item to cart
+- `PATCH /api/cart/items/[id]` - Update item quantity
+- `DELETE /api/cart/items/[id]` - Remove item
+
+### Addresses
+- `GET /api/addresses` - List user addresses
+- `POST /api/addresses` - Add new address
+- `PATCH /api/addresses/[id]` - Update address
+- `DELETE /api/addresses/[id]` - Delete address
+
+### Checkout + Orders
+- `POST /api/checkout/validate` - Validate cart before payment
+- `POST /api/orders` - Place order
+- `GET /api/orders` - List user orders
+- `GET /api/orders/[id]` - Get order details
+
+### Admin
+- `GET /api/admin/orders` - List all orders
+- `PATCH /api/admin/orders/[id]` - Update order status
+
+---
 
 ## 🚀 Getting Started
 
 ### Prerequisites
-*   Node.js 18+
-*   PostgreSQL Database URL
-*   Razorpay Account (Test Mode)
+- Node.js 18+
+- Neon Postgres database URL
 
 ### Installation
 
@@ -71,69 +122,21 @@
 3.  **Environment Setup**
     Create a `.env` file in the root directory:
     ```env
-    # Database
-    DATABASE_URL="postgresql://user:password@localhost:5432/aleesa_db"
-
-    # Authentication
-    JWT_SECRET="your-super-secret-key-min-32-chars"
-
-    # Payments (Razorpay)
-    RAZORPAY_KEY_ID="rzp_test_..."
-    RAZORPAY_KEY_SECRET="your_razorpay_secret"
-
-    # Images (Cloudinary)
-    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your_cloud_name"
+    DATABASE_URL="postgresql://user:password@host:5432/db"
+    JWT_SECRET="your-secret-key"
+    NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME="your-cloud-name"
     ```
 
 4.  **Database Setup**
     ```bash
     npx prisma generate
     npx prisma db push
-    # Optional: Seed initial data
-    npx prisma db seed
     ```
 
 5.  **Run the Development Server**
     ```bash
     npm run dev
     ```
-    Open [http://localhost:3000](http://localhost:3000) to view the app.
-
-## 📂 Project Structure
-
-```bash
-src/
-├── app/
-│   ├── (shop)/          # Customer-facing pages (Home, Cart, Products)
-│   ├── admin/           # Secured Admin Dashboard
-│   ├── api/             # Next.js API Routes (Auth, Checkout)
-│   └── actions/         # Server Actions
-├── components/          # Reusable UI Components
-├── context/             # Global State (CartContext, WishlistContext)
-└── lib/                 # Utilities (Prisma, Auth, Helpers)
-prisma/
-└── schema.prisma        # Database Models
-```
-
-## 🔒 Security
-
-*   **Role-Based Access Control (RBAC)**: Admin routes are protected via middleware and server-side session checks.
-*   **Secure Payments**: Order totals are calculated server-side to prevent client-side manipulation. Payment signatures are verified using HMAC-SHA256.
-*   **Input Validation**: Strict typing with TypeScript and runtime checks.
-
-## 🤝 Contributing
-
-Contributions are welcome! Please fork the repository and submit a Pull Request.
-
-1.  Fork the Project
-2.  Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
-3.  Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
-4.  Push to the Branch (`git push origin feature/AmazingFeature`)
-5.  Open a Pull Request
-
-## 📄 License
-
-Distributed under the MIT License. See `LICENSE` for more information.
 
 ---
 
