@@ -35,6 +35,20 @@ export default async function CollectionPage({
         if (priceMax) where.price.lte = priceMax
     }
 
+    // Size Filter
+    const size = resolvedSearchParams.size
+    if (typeof size === 'string' && size) {
+        where.variants = {
+            some: {
+                sizes: {
+                    some: {
+                        size: size
+                    }
+                }
+            }
+        }
+    }
+
     let title = "All Products"
 
     if (slug === 'new-arrivals') {

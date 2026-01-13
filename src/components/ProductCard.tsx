@@ -101,6 +101,13 @@ export default function ProductCard({ product }: ProductCardProps) {
                         SALE
                     </div>
                 )}
+
+                {/* Stock Status */}
+                {product.variants?.[0]?.sizes?.reduce((acc: number, curr: any) => acc + curr.stock, 0) === 0 ? (
+                    <div className="absolute inset-x-0 bottom-0 bg-black/60 backdrop-blur-sm text-white text-xs font-bold py-2 text-center uppercase tracking-widest">
+                        Out of Stock
+                    </div>
+                ) : null}
             </div>
 
             {/* Product Info */}

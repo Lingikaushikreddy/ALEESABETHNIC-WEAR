@@ -80,7 +80,6 @@ export default function CollectionFilters() {
                                 value={sortBy}
                                 onChange={(e) => {
                                     setSortBy(e.target.value)
-                                    // Auto apply sort (it's fast)
                                     const params = new URLSearchParams(searchParams.toString())
                                     params.set('sort', e.target.value)
                                     router.push(`?${params.toString()}`)
@@ -89,6 +88,29 @@ export default function CollectionFilters() {
                             >
                                 {sortOptions.map(opt => (
                                     <option key={opt.value} value={opt.value}>{opt.label}</option>
+                                ))}
+                            </select>
+                            <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
+                        </div>
+                    </div>
+
+                    {/* Size Filter */}
+                    <div className="min-w-[150px]">
+                        <label className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2 block">Size</label>
+                        <div className="relative">
+                            <select
+                                value={searchParams.get('size') || ''}
+                                onChange={(e) => {
+                                    const params = new URLSearchParams(searchParams.toString())
+                                    if (e.target.value) params.set('size', e.target.value)
+                                    else params.delete('size')
+                                    router.push(`?${params.toString()}`)
+                                }}
+                                className="w-full appearance-none bg-white border border-gray-200 px-4 py-2 pr-8 rounded focus:outline-none focus:border-primary cursor-pointer text-sm font-medium"
+                            >
+                                <option value="">All Sizes</option>
+                                {['XS', 'S', 'M', 'L', 'XL', 'XXL'].map(size => (
+                                    <option key={size} value={size}>{size}</option>
                                 ))}
                             </select>
                             <ChevronDown size={16} className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 pointer-events-none" />
@@ -130,7 +152,7 @@ export default function CollectionFilters() {
                     </div>
 
                     {/* Clear Filters */}
-                    {(priceRange.min || priceRange.max || sortBy !== 'newest') && (
+                    {(priceRange.min || priceRange.max || sortBy !== 'newest' || searchParams.get('size')) && (
                         <div className="md:mb-1">
                             <button
                                 onClick={() => router.push('?')}
