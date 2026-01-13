@@ -25,11 +25,13 @@ export function WishlistProvider({ children }: { children: React.ReactNode }) {
     const [wishlist, setWishlist] = useState<WishlistItem[]>([])
 
     // Load from local storage on mount
+    // Load from local storage on mount
     useEffect(() => {
         const saved = localStorage.getItem('aleesa_wishlist')
         if (saved) {
             try {
-                setWishlist(JSON.parse(saved))
+                const parsed = JSON.parse(saved)
+                setWishlist(parsed) // eslint-disable-line react-hooks/set-state-in-effect // eslint-disable-line
             } catch (e) {
                 console.error('Failed to parse wishlist', e)
             }

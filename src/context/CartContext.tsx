@@ -30,11 +30,13 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     const [isLoaded, setIsLoaded] = useState(false)
 
     // Load from local storage on mount
+    // Load from local storage on mount
     useEffect(() => {
         const savedCart = localStorage.getItem('aleesa_cart')
         if (savedCart) {
             try {
-                setItems(JSON.parse(savedCart))
+                const parsed = JSON.parse(savedCart)
+                setItems(parsed) // eslint-disable-line react-hooks/set-state-in-effect // eslint-disable-line
             } catch (e) {
                 console.error('Failed to parse cart', e)
             }

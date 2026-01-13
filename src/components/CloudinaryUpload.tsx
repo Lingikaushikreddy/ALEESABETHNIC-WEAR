@@ -1,7 +1,7 @@
 
 'use client'
 
-import { useState, useCallback } from 'react'
+import { useState } from 'react'
 import { Upload, X, Loader2 } from 'lucide-react'
 
 type Props = {

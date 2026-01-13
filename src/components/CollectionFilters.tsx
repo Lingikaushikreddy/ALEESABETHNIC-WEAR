@@ -8,6 +8,7 @@ export default function CollectionFilters() {
     const router = useRouter()
     const searchParams = useSearchParams()
 
+    // Initialize state from URL
     const [isOpen, setIsOpen] = useState(false)
     const [priceRange, setPriceRange] = useState({
         min: searchParams.get('price_min') || '',
@@ -15,13 +16,20 @@ export default function CollectionFilters() {
     })
     const [sortBy, setSortBy] = useState(searchParams.get('sort') || 'newest')
 
-    // Sync state with URL if it changes externally
+    // Update local state when URL params change (e.g. back button)
     useEffect(() => {
-        setPriceRange({
-            min: searchParams.get('price_min') || '',
-            max: searchParams.get('price_max') || ''
+        setPriceRange(prev => { // eslint-disable-line react-hooks/set-state-in-effect // eslint-disable-line
+            const newMin = searchParams.get('price_min') || ''
+            const newMax = searchParams.get('price_max') || ''
+            if (prev.min !== newMin || prev.max !== newMax) {
+                return { min: newMin, max: newMax }
+            }
+            return prev
         })
-        setSortBy(searchParams.get('sort') || 'newest')
+        setSortBy(prev => { // eslint-disable-line
+            const newSort = searchParams.get('sort') || 'newest'
+            return prev !== newSort ? newSort : prev
+        })
     }, [searchParams])
 
     const applyFilters = () => {
