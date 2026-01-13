@@ -1,5 +1,6 @@
 import Header from '@/components/Header'
 import Footer from '@/components/Footer'
+import MobileNav from '@/components/MobileNav'
 import { CartProvider } from '@/context/CartContext'
 import { WishlistProvider } from '@/context/WishlistContext'
 
@@ -13,9 +14,10 @@ export default function ShopLayout({
             <WishlistProvider>
                 <CartProvider>
                     <Header />
-                    <main className="flex-1">
+                    <main className="flex-1 pb-16 md:pb-0">
                         {children}
                     </main>
+                    <MobileNav />
                 </CartProvider>
             </WishlistProvider>
             <Footer />

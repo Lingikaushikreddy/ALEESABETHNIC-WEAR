@@ -44,10 +44,16 @@ const ProductCard = ({ product }: { product: any }) => (
 )
 
 export default async function HomePage() {
-  const products = await prisma.product.findMany({
-    take: 8,
-    orderBy: { createdAt: 'desc' }
-  })
+  // Try to fetch products, but don't fail if database isn't connected
+  let products = []
+  try {
+    products = await prisma.product.findMany({
+      take: 8,
+      orderBy: { createdAt: 'desc' }
+    })
+  } catch (error) {
+    console.log('Database not connected yet - deploying without products')
+  }
 
   return (
     <div className="min-h-screen bg-white">

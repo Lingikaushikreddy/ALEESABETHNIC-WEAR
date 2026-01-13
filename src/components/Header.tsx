@@ -2,13 +2,15 @@
 
 import React, { useState } from 'react'
 import Link from 'next/link'
-import { Search, ShoppingBag, Heart, User } from 'lucide-react'
+import { Search, ShoppingBag, Heart, User, Menu } from 'lucide-react'
 import { useCart } from '@/context/CartContext'
 import SearchModal from './SearchModal'
+import MobileMenu from './MobileMenu'
 
 export default function Header() {
     const { cartCount } = useCart()
     const [isSearchOpen, setIsSearchOpen] = useState(false)
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
     return (
         <>
@@ -16,11 +18,20 @@ export default function Header() {
                 {/* Top Bar - Icons & Logo */}
                 <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-20 flex items-center justify-between relative">
 
-                    {/* Left: Search */}
-                    <div className="flex-1">
+                    {/* Left: Mobile Menu / Search */}
+                    <div className="flex-1 flex items-center gap-4">
+                        {/* Mobile Menu Button */}
+                        <button
+                            onClick={() => setIsMobileMenuOpen(true)}
+                            className="md:hidden text-gray-600 hover:text-primary transition-colors p-2 -ml-2"
+                            aria-label="Open menu"
+                        >
+                            <Menu strokeWidth={1.5} size={24} />
+                        </button>
+                        {/* Search Button (Desktop) */}
                         <button
                             onClick={() => setIsSearchOpen(true)}
-                            className="text-gray-600 hover:text-primary transition-colors"
+                            className="hidden md:block text-gray-600 hover:text-primary transition-colors"
                         >
                             <Search strokeWidth={1.5} size={22} />
                         </button>
@@ -83,6 +94,7 @@ export default function Header() {
             </header>
 
             <SearchModal isOpen={isSearchOpen} onClose={() => setIsSearchOpen(false)} />
+            <MobileMenu isOpen={isMobileMenuOpen} onClose={() => setIsMobileMenuOpen(false)} />
         </>
     )
 }
