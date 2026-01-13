@@ -2,11 +2,16 @@ import { NextResponse } from 'next/server'
 import prisma from '@/lib/prisma'
 import Razorpay from 'razorpay'
 
-// Initialize Razorpay
-const razorpay = new Razorpay({
-    key_id: process.env.RAZORPAY_KEY_ID!,
-    key_secret: process.env.RAZORPAY_KEY_SECRET!,
-})
+// Lazy initialize Razorpay only when needed
+function getRazorpay() {
+    if (!process.env.RAZORPAY_KEY_ID || !process.env.RAZORPAY_KEY_SECRET) {
+        throw new Error('Razorpay credentials not configured')
+    }
+    return new Razorpay({
+        key_id: process.env.RAZORPAY_KEY_ID,
+        key_secret: process.env.RAZORPAY_KEY_SECRET,
+    })
+}
 
 export async function POST(request: Request) {
     try {
@@ -45,6 +50,7 @@ export async function POST(request: Request) {
         }
 
         // 2. Create Razorpay Order
+        const razorpay = getRazorpay()
         const orderOptions = {
             amount: Math.round(calculatedTotal * 100),
             currency: "INR",
