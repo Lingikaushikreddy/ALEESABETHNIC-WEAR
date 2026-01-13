@@ -31,6 +31,7 @@ export default function ProductCard({ product }: ProductCardProps) {
                 price: product.price,
                 image: mainImage,
                 size: product.variants[0].sizes[0].size,
+                maxStock: product.variants[0].sizes[0].stock || 10,
                 quantity: 1
             })
         }
