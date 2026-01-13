@@ -12,7 +12,7 @@ export default async function AccountPage() {
     }
 
     const user = await prisma.user.findUnique({
-        where: { id: session.userId }
+        where: { id: session.userId as string }
     })
 
     const displayName = user?.firstName || user?.email?.split('@')[0] || 'User'
