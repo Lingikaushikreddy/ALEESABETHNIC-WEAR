@@ -28,8 +28,8 @@ export default function Header() {
 
                     {/* Center: Logo */}
                     <div className="flex-1 flex justify-center">
-                        <Link href="/" className="text-3xl font-heading font-bold text-primary tracking-tight">
-                            ALEESA
+                        <Link href="/" className="flex items-center">
+                            <img src="/logo.png" alt="Aleesa Ethnic Wear" className="h-12 w-auto object-contain" />
                         </Link>
                     </div>
 
@@ -53,13 +53,27 @@ export default function Header() {
                 </div>
 
                 {/* Bottom Bar - Navigation */}
-                <div className="hidden md:flex justify-center pb-4">
-                    <nav className="flex items-center gap-8 md:gap-12">
-                        {['New Arrivals', 'Suits', 'Sarees', 'Lehengas', 'Gowns', 'Kurtas'].map((item) => (
+                <div className="hidden md:flex justify-center pb-4 overflow-x-auto">
+                    <nav className="flex items-center gap-6 lg:gap-8">
+                        {[
+                            'New Arrivals',
+                            'Suits',
+                            'Sarees',
+                            'Dresses',
+                            'Lehenga Sets',
+                            'Bridals',
+                            'Wedding Edit',
+                            'Formals',
+                            'Luxury Pret',
+                            'Unstitched',
+                            "Men's Wear",
+                            'Jewellery',
+                            'Gifts'
+                        ].map((item) => (
                             <Link
                                 key={item}
-                                href={`/collections/${item.toLowerCase().replace(' ', '-')}`}
-                                className="text-[11px] font-bold uppercase tracking-[2px] text-main hover:text-primary transition-colors"
+                                href={`/collections/${item.toLowerCase().replace(/[']/g, '').replace(/\s+/g, '-')}`}
+                                className="text-[10px] font-bold uppercase tracking-[2px] text-main hover:text-primary transition-colors whitespace-nowrap"
                             >
                                 {item}
                             </Link>

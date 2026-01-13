@@ -1,3 +1,4 @@
+import ImageGallery from '@/components/ImageGallery'
 import prisma from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
@@ -44,22 +45,7 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
             <div className="max-w-[1400px] mx-auto px-4 md:px-8 py-12">
                 <div className="grid md:grid-cols-2 gap-12 mb-24">
                     {/* Image Gallery */}
-                    <div className="space-y-4">
-                        <div className="aspect-[3/4] bg-gray-100 rounded-lg overflow-hidden">
-                            <img
-                                src={product.images[0]}
-                                alt={product.name}
-                                className="w-full h-full object-cover"
-                            />
-                        </div>
-                        <div className="flex gap-4">
-                            {product.images.map((img: string, i: number) => (
-                                <div key={i} className="w-20 h-24 bg-gray-100 rounded overflow-hidden">
-                                    <img src={img} className="w-full h-full object-cover" />
-                                </div>
-                            ))}
-                        </div>
-                    </div>
+                    <ImageGallery images={product.images} productName={product.name} />
 
                     {/* Details */}
                     <div>

@@ -52,24 +52,27 @@ export default async function HomePage() {
   return (
     <div className="min-h-screen bg-white">
       {/* Hero Section */}
-      <div className="relative h-[80vh] w-full overflow-hidden">
-        {/* Background Image - Using a placeholder until user uploads a Banner */}
+      <div className="relative h-[80vh] w-full overflow-hidden bg-gradient-to-br from-purple-900 to-purple-700">
+        {/* Background Image */}
         <img
-          src="https://images.unsplash.com/photo-1596462502278-27bfdd403348?q=80&w=2000&auto=format&fit=crop"
-          className="w-full h-full object-cover object-top"
-          alt="Hero Banner"
+          src="/hero-banner.png"
+          className="w-full h-full object-cover object-center"
+          alt="Aleesa Ethnic Wear - Timeless Traditions, Refined"
         />
         <div className="absolute inset-0 bg-black/10 flex items-center justify-center text-center">
-          <div className="max-w-xl px-4 animate-fade-in-up">
-            <h2 className="text-white font-heading font-medium tracking-[4px] uppercase text-sm mb-4">New Collection</h2>
-            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-8 leading-tight">
-              Ethereal <br /> Elegance
+          <div className="max-w-2xl px-4 animate-fade-in-up">
+            <h2 className="text-white font-heading font-medium tracking-[4px] uppercase text-sm mb-4">#aleesaethnicwear</h2>
+            <h1 className="text-5xl md:text-7xl font-heading font-bold text-white mb-6 leading-tight">
+              Timeless Traditions,<br />Refined
             </h1>
+            <p className="text-white/90 text-lg mb-8 font-light">
+              We dream not only of making women more beautiful but happier too
+            </p>
             <Link
               href="/collections/new-arrivals"
               className="inline-block bg-white text-black px-10 py-4 font-bold uppercase tracking-widest text-xs hover:bg-primary hover:text-white transition-all duration-300"
             >
-              Shop Now
+              Explore Collection
             </Link>
           </div>
         </div>
@@ -79,9 +82,9 @@ export default async function HomePage() {
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-20">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {[
-            { title: 'Sarees', img: 'https://images.unsplash.com/photo-1610030469985-3750e0ff4e8b?w=600' },
-            { title: 'Suits', img: 'https://images.unsplash.com/photo-1610030469983-98e550d6193c?w=600' },
-            { title: 'Lehengas', img: 'https://images.unsplash.com/photo-1594897030264-ab7d87efc473?w=600' },
+            { title: 'Sarees', img: '/category-sarees.png' },
+            { title: 'Suits', img: '/category-suits.png' },
+            { title: 'Lehengas', img: '/category-lehengas.png' },
           ].map((cat) => (
             <Link key={cat.title} href={`/collections/${cat.title.toLowerCase()}`} className="group relative aspect-[3/4] overflow-hidden cursor-pointer">
               <img src={cat.img} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" />

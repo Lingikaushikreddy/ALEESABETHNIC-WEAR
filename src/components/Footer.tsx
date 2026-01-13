@@ -51,19 +51,27 @@ export default function Footer() {
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
                     <div className="col-span-2 lg:col-span-1">
                         <span className="text-2xl font-heading font-bold text-primary tracking-tight">ALEESA</span>
-                        <p className="mt-4 text-sm text-gray-500 leading-relaxed">
-                            Handcrafted ethnic wear celebrating the timeless beauty of Indian traditions designed for the modern woman.
+                        <p className="mt-2 text-xs font-semibold text-gray-700">#aleesaethnicwear</p>
+                        <p className="mt-4 text-sm text-gray-600 leading-relaxed">
+                            We dream not only of making women more beautiful but happier too. Established in 2012, we bring the latest trending ethnic wear collections to both offline and online platforms.
                         </p>
+                        <p className="mt-3 text-sm text-gray-600 leading-relaxed">
+                            Based in Hyderabad, our aim is to reach every Indian woman looking for supreme quality ethnic wear at the most affordable cost.
+                        </p>
+                        <div className="mt-4 space-y-2 text-sm">
+                            <p className="text-gray-700 font-medium">📍 Hyderabad, India</p>
+                            <p className="text-gray-700 font-medium">📞 WhatsApp: <a href="https://wa.me/918143906891" className="text-primary hover:underline">8143906891</a></p>
+                        </div>
                         <div className="flex gap-4 mt-6">
-                            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
+                            <a href="https://instagram.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
                                 <Instagram size={16} />
-                            </span>
-                            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
+                            </a>
+                            <a href="https://facebook.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
                                 <Facebook size={16} />
-                            </span>
-                            <span className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
-                                <Twitter size={16} />
-                            </span>
+                            </a>
+                            <a href="https://wa.me/918143906891" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                            </a>
                         </div>
                     </div>
 
@@ -108,7 +116,7 @@ export default function Footer() {
                 </div>
 
                 <div className="border-t border-gray-200 pt-8 text-center">
-                    <p className="text-xs text-gray-400">© 2026 Aleesa Ethnic Wear. All rights reserved.</p>
+                    <p className="text-xs text-gray-400">© 2012-2026 Aleesa Ethnic Wear. All rights reserved. | Hyderabad, India</p>
                 </div>
             </div>
         </footer>
