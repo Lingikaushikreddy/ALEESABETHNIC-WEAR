@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { Star } from 'lucide-react'
 import ProductActions from '@/components/ProductActions'
 import ProductReviews from '@/components/ProductReviews'
+import RecentlyViewed from '@/components/RecentlyViewed'
 
 export default async function ProductDetailPage({ params }: { params: Promise<{ slug: string }> }) {
     const { slug } = await params
@@ -106,6 +107,18 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
                         </div>
                     </div>
                 )}
+
+                {/* Recently Viewed */}
+                <RecentlyViewed
+                    currentProduct={{
+                        id: product.id,
+                        name: product.name,
+                        price: product.price,
+                        image: product.images[0],
+                        slug: product.slug,
+                        category: product.category
+                    }}
+                />
             </div>
         </div>
     )
