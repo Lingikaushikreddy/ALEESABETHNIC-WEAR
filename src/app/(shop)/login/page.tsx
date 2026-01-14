@@ -35,7 +35,7 @@ export default function LoginPage() {
     return (
         <div className="min-h-screen flex items-center justify-center bg-gray-50">
             <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-sm">
-                <h1 className="text-2xl font-bold text-center mb-6 text-gray-900">Admin Login</h1>
+                <h1 className="text-2xl font-bold text-center mb-6 text-gray-900">Customer Login</h1>
 
                 {error && (
                     <div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm">
