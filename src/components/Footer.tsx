@@ -1,6 +1,6 @@
 
 import Link from 'next/link'
-import { Facebook, Instagram, Twitter, Truck, RotateCcw, Headphones, Shirt } from 'lucide-react'
+import { Facebook, Instagram, Twitter, Truck, RotateCcw, Headphones, Shirt, MapPin } from 'lucide-react'
 
 export default function Footer() {
     return (
@@ -49,28 +49,55 @@ export default function Footer() {
 
                 {/* Links Grid */}
                 <div className="grid grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
-                    <div className="col-span-2 lg:col-span-1">
-                        <span className="text-2xl font-heading font-bold text-primary tracking-tight">ALEESA</span>
-                        <p className="mt-2 text-xs font-semibold text-gray-700">#aleesaethnicwear</p>
-                        <p className="mt-4 text-sm text-gray-600 leading-relaxed">
-                            We dream not only of making women more beautiful but happier too. Established in 2012, we bring the latest trending ethnic wear collections to both offline and online platforms.
+                    <div className="col-span-2 lg:col-span-1 flex flex-col items-start">
+                        {/* Logo */}
+                        <Link href="/" className="mb-6 block relative">
+                            <img
+                                src="/logo.png"
+                                alt="Aleesa Ethnic Wear"
+                                className="h-20 w-auto object-contain"
+                            />
+                        </Link>
+
+                        {/* Hashtag */}
+                        <p className="mb-6 text-xs font-bold tracking-[0.2em] text-pink-600 uppercase border-b border-pink-100 pb-2">
+                            #aleesaethnicwear
                         </p>
-                        <p className="mt-3 text-sm text-gray-600 leading-relaxed">
-                            Based in Hyderabad, our aim is to reach every Indian woman looking for supreme quality ethnic wear at the most affordable cost.
-                        </p>
-                        <div className="mt-4 space-y-2 text-sm">
-                            <p className="text-gray-700 font-medium">📍 Hyderabad, India</p>
-                            <p className="text-gray-700 font-medium">📞 WhatsApp: <a href="https://wa.me/918143906891" className="text-primary hover:underline">8143906891</a></p>
+
+                        {/* Description */}
+                        <div className="space-y-4 text-sm leading-7 text-gray-600 font-light">
+                            <p>
+                                <span className="font-serif italic text-lg text-gray-800 pr-1">"</span>
+                                We dream not only of making women more beautiful but happier too. Established in 2012, we bring the latest trending ethnic wear collections to both offline and online platforms.
+                            </p>
+                            <p>
+                                Based in Hyderabad, our aim is to reach every Indian woman looking for supreme quality ethnic wear at the most affordable cost.
+                            </p>
                         </div>
-                        <div className="flex gap-4 mt-6">
-                            <a href="https://instagram.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
-                                <Instagram size={16} />
+
+                        {/* Contact Info */}
+                        <div className="mt-8 space-y-3">
+                            <div className="flex items-center gap-3 text-sm text-gray-700 group">
+                                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-primary group-hover:text-white transition-all">
+                                    <MapPin size={14} strokeWidth={2} />
+                                </div>
+                                <span className="font-medium">Hyderabad, India</span>
+                            </div>
+                            <a href="https://wa.me/918143906891" target="_blank" rel="noopener noreferrer" className="flex items-center gap-3 text-sm text-gray-700 group cursor-pointer">
+                                <div className="w-8 h-8 rounded-full bg-gray-50 flex items-center justify-center text-gray-400 group-hover:bg-green-500 group-hover:text-white transition-all">
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                                </div>
+                                <span className="font-medium group-hover:text-green-600 transition-colors">WhatsApp: 8143906891</span>
                             </a>
-                            <a href="https://facebook.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
-                                <Facebook size={16} />
+                        </div>
+
+                        {/* Social Links */}
+                        <div className="flex gap-4 mt-8 pt-6 border-t border-gray-100 w-full">
+                            <a href="https://instagram.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-gray-400 shadow-sm border border-gray-100 hover:border-pink-500 hover:text-pink-500 hover:shadow-md transition-all transform hover:-translate-y-1">
+                                <Instagram size={18} />
                             </a>
-                            <a href="https://wa.me/918143906891" target="_blank" rel="noopener noreferrer" className="w-8 h-8 flex items-center justify-center rounded-full bg-white hover:bg-primary hover:text-white transition-colors cursor-pointer text-gray-600 border border-gray-200">
-                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
+                            <a href="https://facebook.com/aleesaethnicwear" target="_blank" rel="noopener noreferrer" className="w-10 h-10 flex items-center justify-center rounded-full bg-white text-gray-400 shadow-sm border border-gray-100 hover:border-blue-600 hover:text-blue-600 hover:shadow-md transition-all transform hover:-translate-y-1">
+                                <Facebook size={18} />
                             </a>
                         </div>
                     </div>
