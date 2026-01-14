@@ -2,86 +2,137 @@
 
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
-import { ShieldAlert } from 'lucide-react'
+import { ShieldCheck, Loader2 } from 'lucide-react'
+import Image from 'next/image'
 
 export default function AdminLoginPage() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
     const [error, setError] = useState('')
+    const [isLoading, setIsLoading] = useState(false)
     const router = useRouter()
 
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault()
         setError('')
+        setIsLoading(true)
 
-        const res = await fetch('/api/auth/login', {
-            method: 'POST',
-            body: JSON.stringify({ email, password }),
-            headers: { 'Content-Type': 'application/json' }
-        })
+        try {
+            const res = await fetch('/api/auth/login', {
+                method: 'POST',
+                body: JSON.stringify({ email, password }),
+                headers: { 'Content-Type': 'application/json' }
+            })
 
-        if (res.ok) {
-            const data = await res.json()
-            if (data.role === 'ADMIN') {
-                router.push('/admin')
+            if (res.ok) {
+                const data = await res.json()
+                if (data.role === 'ADMIN') {
+                    router.push('/admin')
+                } else {
+                    setError('Access Denied: Administrative privileges required.')
+                    setIsLoading(false)
+                }
             } else {
-                setError('Access Denied: You are not an admin.')
-                // Optionally logout immediately if not admin
+                setError('Invalid credentials. Please try again.')
+                setIsLoading(false)
             }
-        } else {
-            setError('Invalid credentials')
+        } catch (err) {
+            setError('An error occurred. Please try again.')
+            setIsLoading(false)
         }
     }
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gray-900">
-            <div className="max-w-md w-full bg-white p-8 rounded-lg shadow-2xl border-t-4 border-pink-600">
-                <div className="flex justify-center mb-6">
-                    <div className="bg-pink-100 p-3 rounded-full">
-                        <ShieldAlert className="w-8 h-8 text-pink-600" />
-                    </div>
-                </div>
-                <h1 className="text-2xl font-bold text-center mb-2 text-gray-900">Admin Portal</h1>
-                <p className="text-center text-gray-500 mb-8 text-sm">Secure access for store owners only</p>
+        <div className="min-h-screen relative flex items-center justify-center overflow-hidden">
+            {/* Background Image with Overlay */}
+            <div className="absolute inset-0 z-0">
+                <Image
+                    src="https://images.unsplash.com/photo-1617627143750-d86bc21e42bb?w=1600&q=80"
+                    alt="Royal Ethnic Saree Background"
+                    fill
+                    className="object-cover"
+                    priority
+                />
+                <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"></div>
+            </div>
 
-                {error && (
-                    <div className="bg-red-50 text-red-600 p-3 rounded mb-4 text-sm border border-red-200">
-                        {error}
-                    </div>
-                )}
+            {/* Login Card */}
+            <div className="relative z-10 w-full max-w-md mx-4">
+                <div className="bg-white/10 backdrop-blur-md border border-white/20 shadow-2xl rounded-2xl p-8 md:p-10">
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Email Address</label>
-                        <input
-                            type="email"
-                            value={email}
-                            onChange={e => setEmail(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all"
-                            placeholder="admin@aleesa.com"
-                            required
-                        />
+                    {/* Header */}
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-white/10 border border-white/20 mb-4 backdrop-blur-sm shadow-[0_0_15px_rgba(255,255,255,0.1)]">
+                            <ShieldCheck className="w-8 h-8 text-white" strokeWidth={1.5} />
+                        </div>
+                        <h1 className="text-3xl font-serif text-white tracking-wide mb-2 drop-shadow-md">
+                            Aleesa Admin
+                        </h1>
+                        <p className="text-white/70 text-sm font-light tracking-wider uppercase">
+                            Secure Portal Access
+                        </p>
                     </div>
-                    <div>
-                        <label className="block text-xs font-bold uppercase text-gray-500 mb-1">Password</label>
-                        <input
-                            type="password"
-                            value={password}
-                            onChange={e => setPassword(e.target.value)}
-                            className="w-full px-3 py-2 border border-gray-300 rounded focus:ring-2 focus:ring-pink-500 focus:border-transparent outline-none transition-all"
-                            required
-                        />
-                    </div>
-                    <button
-                        type="submit"
-                        className="w-full bg-black text-white py-3 rounded hover:bg-gray-800 font-bold tracking-wide transition-colors mt-2"
-                    >
-                        ACCESS DASHBOARD
-                    </button>
-                </form>
 
-                <div className="mt-6 text-center">
-                    <a href="/login" className="text-xs text-gray-400 hover:text-gray-600">Not an admin? Go to Customer Login</a>
+                    {/* Error Message */}
+                    {error && (
+                        <div className="bg-red-500/10 border border-red-500/20 text-red-100 p-3 rounded-lg mb-6 text-sm text-center backdrop-blur-sm">
+                            {error}
+                        </div>
+                    )}
+
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} className="space-y-6">
+                        <div className="space-y-2">
+                            <label className="text-xs font-semibold text-white/80 uppercase tracking-widest pl-1">
+                                Email Address
+                            </label>
+                            <input
+                                type="email"
+                                value={email}
+                                onChange={e => setEmail(e.target.value)}
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all backdrop-blur-sm hover:bg-white/10"
+                                placeholder="name@aleesa.com"
+                                required
+                            />
+                        </div>
+
+                        <div className="space-y-2">
+                            <label className="text-xs font-semibold text-white/80 uppercase tracking-widest pl-1">
+                                Password
+                            </label>
+                            <input
+                                type="password"
+                                value={password}
+                                onChange={e => setPassword(e.target.value)}
+                                className="w-full px-4 py-3 bg-white/5 border border-white/10 rounded-xl text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-pink-500/50 focus:border-pink-500/50 transition-all backdrop-blur-sm hover:bg-white/10"
+                                placeholder="••••••••"
+                                required
+                            />
+                        </div>
+
+                        <button
+                            type="submit"
+                            disabled={isLoading}
+                            className="w-full bg-gradient-to-r from-pink-700 to-purple-800 hover:from-pink-600 hover:to-purple-700 text-white font-medium py-3.5 rounded-xl shadow-lg shadow-pink-900/30 transform transition-all active:scale-[0.98] disabled:opacity-70 disabled:cursor-not-allowed mt-4 border border-white/10"
+                        >
+                            {isLoading ? (
+                                <span className="flex items-center justify-center gap-2">
+                                    <Loader2 className="w-5 h-5 animate-spin" />
+                                    Verifying...
+                                </span>
+                            ) : (
+                                "Enter Dashboard"
+                            )}
+                        </button>
+                    </form>
+
+                    {/* Footer */}
+                    <div className="mt-8 text-center">
+                        <p className="text-white/40 text-xs font-light tracking-wide">
+                            Authorized personnel only. <br />
+                            Unauthorized access is strictly prohibited.
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
