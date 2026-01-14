@@ -2,7 +2,7 @@
 'use client'
 
 import { useState } from 'react'
-import { updateStock, deleteProduct } from '../actions'
+import { updateStock, deleteProduct } from '../../actions'
 import { useRouter } from 'next/navigation'
 import { Trash, Save, Loader2, ChevronDown, ChevronUp } from 'lucide-react'
 

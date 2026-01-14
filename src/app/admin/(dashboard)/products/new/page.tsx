@@ -3,7 +3,7 @@
 
 import { useState } from 'react'
 import CloudinaryUpload from '@/components/CloudinaryUpload'
-import { createProduct } from '../../actions'
+import { createProduct } from '../../../actions'
 import { useRouter } from 'next/navigation'
 import { ArrowLeft, Plus, X } from 'lucide-react'
 import Link from 'next/link'
