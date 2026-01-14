@@ -16,7 +16,7 @@ export default function Header() {
         <>
             <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
                 {/* Top Bar - Icons & Logo */}
-                <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-20 flex items-center justify-between relative">
+                <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-24 flex items-center justify-between relative">
 
                     {/* Left: Mobile Menu / Search */}
                     <div className="flex-1 flex items-center gap-4">
@@ -26,24 +26,24 @@ export default function Header() {
                             className="md:hidden text-gray-600 hover:text-primary transition-colors p-2 -ml-2"
                             aria-label="Open menu"
                         >
-                            <Menu strokeWidth={1.5} size={24} />
+                            <Menu strokeWidth={1.5} size={28} />
                         </button>
                         {/* Search Button (Desktop) */}
                         <button
                             onClick={() => setIsSearchOpen(true)}
                             className="hidden md:block text-gray-600 hover:text-primary transition-colors"
                         >
-                            <Search strokeWidth={1.5} size={22} />
+                            <Search strokeWidth={1.5} size={24} />
                         </button>
                     </div>
 
                     {/* Center: Logo */}
                     <div className="flex-1 flex justify-center">
-                        <Link href="/" className="flex items-center bg-white/80 backdrop-blur-sm px-4 py-2 rounded-lg shadow-sm">
+                        <Link href="/" className="flex items-center">
                             <img
                                 src="/logo.png"
                                 alt="Aleesa Ethnic Wear"
-                                className="h-14 md:h-16 w-auto object-contain"
+                                className="h-20 md:h-24 w-auto object-contain"
                             />
                         </Link>
                     </div>
