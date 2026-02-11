@@ -1,5 +1,5 @@
 import ImageGallery from '@/components/ImageGallery'
-import prisma from '@/lib/prisma'
+// import prisma from '@/lib/prisma'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
 import { Star } from 'lucide-react'
@@ -11,31 +11,68 @@ export default async function ProductDetailPage({ params }: { params: Promise<{ 
     const { slug } = await params
 
     // Fetch product with variants (and their sizes) and reviews (and their authors)
-    const product = await prisma.product.findUnique({
-        where: { slug },
-        include: {
-            variants: {
-                include: {
-                    sizes: true
-                }
-            },
-            reviews: {
-                orderBy: { createdAt: 'desc' },
-                include: { user: true }
+    // const product = await prisma.product.findUnique({
+    //     where: { slug },
+    //     include: {
+    //         variants: {
+    //             include: {
+    //                 sizes: true
+    //             }
+    //         },
+    //         reviews: {
+    //             orderBy: { createdAt: 'desc' },
+    //             include: { user: true }
+    //         }
+    //     } as any // Cast to any because Prisma types might be stale
+    // }) as any
+
+    const product = {
+        id: '1',
+        name: 'Mock Product',
+        slug: slug,
+        price: 9999,
+        salePrice: 7999,
+        description: 'This is a mock product description for demonstration purposes. The database connection is currently bypassed.',
+        category: 'Sarees',
+        images: ['/products/saree-1.jpg', '/products/saree-2.jpg'],
+        reviews: [
+            { id: 'r1', rating: 5, comment: 'Great quality!', createdAt: new Date(), user: { name: 'Jane Doe' } }
+        ],
+        variants: [
+            {
+                id: 'v1',
+                name: 'Red',
+                sizes: [
+                    { id: 's1', size: 'S', stock: 10 },
+                    { id: 's2', size: 'M', stock: 5 },
+                    { id: 's3', size: 'L', stock: 0 }
+                ]
             }
-        } as any // Cast to any because Prisma types might be stale
-    }) as any
+        ]
+
+    }
 
     if (!product) notFound()
 
     // Fetch similar products based on the same category
-    const similarProducts = await prisma.product.findMany({
-        where: {
-            category: product.category,
-            id: { not: product.id }
-        },
-        take: 4
-    })
+    // const similarProducts = await prisma.product.findMany({
+    //     where: {
+    //         category: product.category,
+    //         id: { not: product.id }
+    //     },
+    //     take: 4
+    // })
+
+    const similarProducts = [
+        {
+            id: '2',
+            name: 'Similar Mock Product',
+            slug: 'similar-mock-product',
+            price: 5499,
+            category: 'Sarees',
+            images: ['/products/saree-2.jpg']
+        }
+    ]
 
     // Simplified view: Just show the first variant
     const variant = product.variants[0]

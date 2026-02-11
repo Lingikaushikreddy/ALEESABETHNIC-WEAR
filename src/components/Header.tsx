@@ -16,7 +16,7 @@ export default function Header() {
         <>
             <header className="bg-white sticky top-0 z-50 border-b border-gray-100">
                 {/* Top Bar - Icons & Logo */}
-                <div className="max-w-[1400px] mx-auto px-4 md:px-8 h-24 flex items-center justify-between relative">
+                <div className="max-w-[1400px] mx-auto px-4 md:px-8 min-h-[120px] py-4 flex items-center justify-between relative">
 
                     {/* Left: Mobile Menu / Search */}
                     <div className="flex-1 flex items-center gap-4">
@@ -43,7 +43,7 @@ export default function Header() {
                             <img
                                 src="/logo.png"
                                 alt="Aleesa Ethnic Wear"
-                                className="h-20 md:h-24 w-auto object-contain"
+                                className="h-32 md:h-40 w-auto object-contain mix-blend-multiply"
                             />
                         </Link>
                     </div>

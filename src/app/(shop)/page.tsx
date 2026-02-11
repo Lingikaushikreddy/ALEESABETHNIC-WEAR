@@ -1,7 +1,8 @@
 
-import prisma from '@/lib/prisma'
+// import prisma from '@/lib/prisma'
 import Link from 'next/link'
 import { Heart, Zap } from 'lucide-react'
+import TrustedSection from '@/components/TrustedSection'
 
 // Neerus-style Product Card
 const ProductCard = ({ product }: { product: any }) => (
@@ -45,10 +46,49 @@ const ProductCard = ({ product }: { product: any }) => (
 
 export default async function HomePage() {
   // Fetch products from database
-  const products = await prisma.product.findMany({
-    take: 8,
-    orderBy: { createdAt: 'desc' }
-  })
+  // const products = await prisma.product.findMany({
+  //   take: 8,
+  //   orderBy: { createdAt: 'desc' }
+  // })
+
+  const products = [
+    {
+      id: '1',
+      name: 'Eternal Red Silk Saree',
+      slug: 'eternal-red-silk-saree',
+      price: 15999,
+      salePrice: 12999,
+      images: ['/products/saree-1.jpg'],
+      createdAt: new Date(),
+    },
+    {
+      id: '2',
+      name: 'Royal Blue Anarkali Suit',
+      slug: 'royal-blue-anarkali-suit',
+      price: 8999,
+      salePrice: null,
+      images: ['/products/suit-1.jpg'],
+      createdAt: new Date(),
+    },
+    {
+      id: '3',
+      name: 'Emerald Green Lehenga',
+      slug: 'emerald-green-lehenga',
+      price: 24999,
+      salePrice: 19999,
+      images: ['/products/lehenga-1.jpg'],
+      createdAt: new Date(),
+    },
+    {
+      id: '4',
+      name: 'Blush Pink Organza Saree',
+      slug: 'blush-pink-organza-saree',
+      price: 6499,
+      salePrice: 4999,
+      images: ['/products/saree-2.jpg'],
+      createdAt: new Date(),
+    },
+  ]
 
   return (
     <div className="min-h-screen bg-white">
@@ -78,6 +118,9 @@ export default async function HomePage() {
           </div>
         </div>
       </div>
+
+
+      <TrustedSection />
 
       {/* Categories / Collections Grid */}
       <div className="max-w-[1600px] mx-auto px-4 md:px-8 py-20">
